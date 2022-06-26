@@ -1,0 +1,16 @@
+
+.App{
+    background: url("../svg/BackGround.svg") no-repeat center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.h1{
+    color: red;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
