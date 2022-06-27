@@ -1,5 +1,7 @@
 import React, {createContext, useState} from 'react';
+
 export const BrowserContextState = createContext();
+
 function BrowserContext({children}) {
     const [browserState, setBrowserState] = useState({
         isLoading: false,
@@ -11,7 +13,8 @@ function BrowserContext({children}) {
         isSuccessMessage: '',
         isWarningMessage: '',
         isInfoMessage: '',
-
+        demoSite: 'https://www.facebook.com',
+        demoSiteUniqueId: '#helloWorld',
 
 
     });

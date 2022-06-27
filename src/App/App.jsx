@@ -5,6 +5,7 @@ import {CssBaseline} from "@mui/material";
 import {createGlobalStyle} from "styled-components";
 
 import BrowserContext from "../Context/BrowserContext";
+import Frame from "../Component/Ui/Frame";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -20,6 +21,7 @@ function App() {
           <GlobalStyle/>
           <CssBaseline/>
           <Header/>
+          <Frame/>
       </div>
         </BrowserContext>
     )

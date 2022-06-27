@@ -1,10 +1,19 @@
 import React from 'react';
+import Iframe from "react-iframe";
+import {useContext} from "react";
+import {BrowserContextState} from "../../Context/BrowserContext";
+
+
 
 function Frame() {
+    const {browserState} = useContext(BrowserContextState);
     return (
-        <>
-        <h1>Its Frame</h1>
-        </>
+        <Iframe url={browserState.demoSite}
+                width="100%"
+                height="100%"
+                id={browserState.demoSiteUniqueId}/>
+
+
     );
 }
 
