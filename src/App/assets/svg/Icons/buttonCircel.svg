@@ -6,7 +6,7 @@
       <stop offset="0.791" stop-color="#787c80" stop-opacity="0.502"/>
       <stop offset="1" stop-color="#eff8ff" stop-opacity="0.902"/>
     </linearGradient>
-    <filter id="Rectangle_458" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse">
+    <filter id="Rectangle_457" x="0" y="0" width="48" height="48" filterUnits="userSpaceOnUse">
       <feOffset dy="3" input="SourceAlpha"/>
       <feGaussianBlur stdDeviation="3" result="blur"/>
       <feFlood flood-opacity="0.161"/>
@@ -14,8 +14,8 @@
       <feComposite in="SourceGraphic"/>
     </filter>
   </defs>
-  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_458)">
-    <g id="Rectangle_458-2" data-name="Rectangle 458" transform="translate(9 6)" stroke="rgba(125,125,125,0.04)" stroke-width="2" fill="url(#linear-gradient)">
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#Rectangle_457)">
+    <g id="Rectangle_457-2" data-name="Rectangle 457" transform="translate(9 6)" stroke="rgba(125,125,125,0.04)" stroke-width="2" fill="url(#linear-gradient)">
       <rect width="30" height="30" rx="15" stroke="none"/>
       <rect x="1" y="1" width="28" height="28" rx="14" fill="none"/>
     </g>
