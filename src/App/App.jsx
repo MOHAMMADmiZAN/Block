@@ -1,7 +1,10 @@
+import React from "react";
 import AppCss from './assets/css/App.module.css'
 import Header from "../Component/Ui/Header";
 import {CssBaseline} from "@mui/material";
 import {createGlobalStyle} from "styled-components";
+
+import BrowserContext from "../Context/BrowserContext";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -12,11 +15,13 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
     return (
+        <BrowserContext >
       <div className={AppCss.App}>
           <GlobalStyle/>
           <CssBaseline/>
           <Header/>
       </div>
+        </BrowserContext>
     )
 }
 
