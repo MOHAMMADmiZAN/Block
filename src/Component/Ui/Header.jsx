@@ -1,14 +1,11 @@
-import {Avatar, Box, CssBaseline, Grid} from "@mui/material";
+import {Avatar, Box,Grid} from "@mui/material";
 import styled from "styled-components";
-import { createGlobalStyle } from 'styled-components'
-
 import MetaMask from '../../App/assets/svg/Icons/metamask-bw-2.svg';
 import User from '../../App/assets/svg/Icons/amir-personal.svg';
 import LeftIcon from '../../App/assets/svg/Icons/Left.svg';
 import RightIcon from '../../App/assets/svg/Icons/Right.svg';
 import Reload from '../../App/assets/svg/Icons/Reload.svg';
 import HomeIcon from '../../App/assets/svg/Icons/Home.svg';
-// import SearchIcon from '../../App/assets/svg/Icons/search.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical} from '@fortawesome/free-solid-svg-icons'
 
@@ -29,7 +26,7 @@ const SearchInput = styled.input`
   height: 30px;
   border-radius: 20px;
   border: none;
-  background: rgba(239, 248, 255, 0.1);
+  background: linear-gradient(360deg, rgba(239,248,255,0.5) 0%, rgba(17,29,20,0.2) 35%, rgba(239,248,255,0.5) 100%);
   padding: 0 40px;
   margin: 10px;
   position: relative;
@@ -38,7 +35,8 @@ const SearchInput = styled.input`
   &:focus {
     outline: none;
   }
-  &:before{
+
+  &:before {
     content: '';
     background: url("/src/App/assets/svg/Icons/search.svg");
     position: absolute;
@@ -75,7 +73,6 @@ function Header() {
                     </Grid>
                     <Grid item lg={6} xs={6} sm={6} xl={6} md={6} sx={{position: 'relative'}}>
                         <SearchInput/>
-                        {/*<SearchIcon sx={{position: 'absolute', top: '30%', left: '3%'}}/>*/}
                     </Grid>
                     <Grid item lg={3} xs={3} sm={3} xl={3} md={3} sx={{textAlign: 'right'}}>
                         <Item><Avatar src={MetaMask} alt={`Metamask`}
