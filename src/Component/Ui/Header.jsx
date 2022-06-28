@@ -59,11 +59,15 @@ const positionCenter = {
 function Header() {
     const {browserState, setBrowserState} = useContext(BrowserContextState);
 
-    const handleClick = () => {
-        setBrowserState({
-            ...browserState,
-            isLoading: !browserState.isLoading,
-        })
+    const handlePress = (e) => {
+        if(e.key === 'Enter'){
+            if (e.target.value === browserState.demoSiteUniqueId){
+                setBrowserState({...browserState, isLoading: true})
+            }
+        }
+    }
+   const isLoadingFalse = () => {
+        setBrowserState({...browserState, isLoading: false})
     }
 
     return (
@@ -77,7 +81,7 @@ function Header() {
                         <Item><Avatar src={HomeIcon} sx={{...positionCenter, width: '17px', height: '18px'}}/></Item>
                     </Grid>
                     <Grid item lg={6} xs={6} sm={6} xl={6} md={6} sx={{position: 'relative'}}>
-                        <SearchInput onClick={handleClick}/>
+                        <SearchInput onKeyPress={handlePress}/>
                         <Avatar src={SearchIcon} sx={{
                             ...positionCenter,
                             width: '20px',
@@ -98,7 +102,7 @@ function Header() {
                 </Grid>
             </Box>}
             {browserState.isLoading && <Box sx={{position:'relative'}}>
-                <Item style={{margin:'0 auto',position: 'absolute', top: '-12px',left:"50%"}}><Avatar src={DownIcon} alt={`DownIcon`} onClick={handleClick} sx={{...positionCenter, width: '10px', height: '17px'}}/> </Item>
+                <Item style={{margin:'0 auto',position: 'absolute', top: '-12px',left:"50%"}}><Avatar src={DownIcon} alt={`DownIcon`} onClick={isLoadingFalse} sx={{...positionCenter, width: '10px', height: '17px'}}/> </Item>
             </Box>}
         </>
     );
