@@ -3,6 +3,8 @@ import React, {createContext, useState} from 'react';
 export const BrowserContextState = createContext();
 const initial = {
     isLoading: false,
+    isBarActive: false,
+    isFrameReloading: '',
     isError: false,
     isSuccess: false,
     isWarning: false,

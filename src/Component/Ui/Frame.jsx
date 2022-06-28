@@ -1,17 +1,22 @@
-import React from 'react';
-import Iframe from "react-iframe";
+import React, {useEffect, useRef} from 'react';
 import {useContext} from "react";
 import {BrowserContextState} from "../../Context/BrowserContext";
 
 
 function Frame() {
-    const {browserState} = useContext(BrowserContextState);
+    const {browserState, setBrowserState} = useContext(BrowserContextState);
+    const refFrame = useRef(null);
+
+    useEffect(() => {
+        setBrowserState({...browserState, isFrameReloading: refFrame.current})
+    }, [browserState.isLoading])
+
+
     return (
         <>
-            {browserState.isLoading && <Iframe url={browserState.demoSite}
-                                               width="100%"
-                                               height="100%"
-                                               id={browserState.demoSiteUniqueId}/>}
+            {browserState.isLoading &&
+                <iframe ref={refFrame} src={browserState.demoSite} width="100%" height="100%"
+                        id={browserState.demoSiteUniqueId}/>}
         </>
 
 
