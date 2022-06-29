@@ -20,7 +20,9 @@ const Item = styled.button`
   height: 30px;
   border-radius: 50%;
   border: none;
-  background: url("/src/App/assets/svg/Icons/buttonCircel.svg") no-repeat center;
+  //background: url("/src/App/assets/svg/Icons/buttonCircel.svg") no-repeat center;
+  background: linear-gradient(360deg, rgba(239, 248, 255, 0.5) 0%, rgba(17, 29, 20, 0.2) 50%, rgba(239, 248, 255, 0.3) 100%);
+
   cursor: pointer;
   margin: 10px;
   position: relative;
