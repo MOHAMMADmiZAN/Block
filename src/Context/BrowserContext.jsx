@@ -4,19 +4,13 @@ export const BrowserContextState = createContext();
 const initial = {
     isLoading: false,
     isBarActive: false,
-    isFrameReloading: '',
-    isError: false,
-    isSuccess: false,
-    isWarning: false,
-    isInfo: false,
-    isErrorMessage: '',
-    isSuccessMessage: '',
-    isWarningMessage: '',
-    isInfoMessage: '',
-    demoSite: 'https://rattan-house.store/rattan-house-vtour/',
+    isFrameReloading: " ",
     demoSiteUniqueId: '#helloWorld',
-
-
+    currentPage: " ",
+    previousPage: " ",
+    nextPage: " ",
+    searchHistory: ['www.google.com', 'www.facebook.com', 'www.youtube.com'],
+    isHistory: false,
 }
 
 function BrowserContext({children}) {

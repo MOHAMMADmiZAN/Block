@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {useContext} from "react";
 import {BrowserContextState} from "../../Context/BrowserContext";
+import Iframe from "react-iframe";
 
 
 function Frame() {
@@ -15,8 +16,9 @@ function Frame() {
     return (
         <>
             {browserState.isLoading &&
-                <iframe ref={refFrame} src={browserState.demoSite} width="100%" height="100%"
+                <iframe ref={refFrame} src={browserState.currentPage} width="100%" height="100%"
                         id={browserState.demoSiteUniqueId}/>}
+
         </>
 
 

@@ -10,7 +10,8 @@ import SearchIcon from '../../App/assets/svg/Icons/Search.svg';
 import DownIcon from '../../App/assets/svg/Icons/Down.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical} from '@fortawesome/free-solid-svg-icons'
-import {useContext} from "react";
+import CloseIcon from '@mui/icons-material/Close';
+import {useContext, useEffect} from "react";
 import {BrowserContextState} from "../../Context/BrowserContext";
 import {useRef} from "react";
 
@@ -62,29 +63,51 @@ const positionCenter = {
 function Header() {
     const {browserState, setBrowserState} = useContext(BrowserContextState);
     const refWindow = useRef(window);
+    useEffect(() => {
+        console.log(browserState)
+    }, [])
 
     const handlePress = (e) => {
         if (e.key === 'Enter') {
-            if (e.target.value === browserState.demoSiteUniqueId) {
-                setBrowserState({...browserState, isLoading: true})
-            }
+            setBrowserState({
+                ...browserState,
+                isLoading: true,
+                currentPage: e.target.value,
+                // currentPage: "https://rattan-house.store/rattan-house-vtour/",
+                searchHistory: [...browserState.searchHistory, e.target.value]
+            })
+            console.log(browserState.searchHistory);
         }
+    }
+    const handleOnFocus = () => {
+        setBrowserState({
+            ...browserState,
+            isHistory: true
+        })
+    }
+    const handleOnBlur = () => {
+        setBrowserState({
+            ...browserState,
+            isHistory: false
+        })
     }
     const isBarActive = () => {
         setBrowserState({...browserState, isBarActive: true})
+    }
+    const isBarInActive = () => {
+        setBrowserState({...browserState, isBarActive: false})
     }
     const homeClick = () => {
         setBrowserState({...browserState, isLoading: false, isBarActive: false})
     }
     const reloadClick = () => {
 
-        // if (browserState.isFrameReloading) {
-        //     browserState.isFrameReloading.contentWindow.location.reload();
-        //     // console.log('contentWindow', browserState.isFrameReloading.contentWindow.location)
-        // } else {
-            refWindow.current.location.reload();
-        //     console.log('refWindow', refWindow.current.location)
-        // }
+        console.log(localStorage.getItem('browserState'))
+        setBrowserState({
+            ...browserState,
+            isLoading: true,
+            currentPage: "https://rattan-house.store/rattan-house-vtour/"
+        })
     }
 
 
@@ -107,7 +130,8 @@ function Header() {
                                                               sx={{...positionCenter, width: '17px', height: '18px'}}/></Item>
                         </Grid>
                         <Grid item lg={6} xs={6} sm={6} xl={6} md={6} sx={{position: 'relative'}}>
-                            <SearchInput onKeyPress={handlePress}/>
+                            <SearchInput onKeyPress={handlePress} defaultValue={browserState.currentPage}
+                                         onFocus={handleOnFocus} onBlur={handleOnBlur}/>
                             <Avatar src={SearchIcon} sx={{
                                 ...positionCenter,
                                 width: '20px',
@@ -127,10 +151,35 @@ function Header() {
                         </Grid>
                     </Grid>
                 </Box>}
+            {/*{(browserState.isHistory && browserState.searchHistory.length > 0) && <Box sx={*/}
+            {/*    {*/}
+            {/*        width: '100%',*/}
+            {/*        maxWidth: '800px',*/}
+            {/*        height: '500px',*/}
+            {/*        background: 'linear-gradient(360deg, rgba(239, 248, 255, 0.9) 0%, rgba(17, 29, 20, 0.2) 50%, rgba(239, 248, 255, 0.9) 100%)',*/}
+            {/*        margin: '0 auto',*/}
+            {/*        borderRadius: '20px',*/}
+            {/*        padding: '20px',*/}
+            {/*    }*/}
+            {/*}>*/}
+            {/*    <ul>*/}
+            {/*        {browserState.searchHistory.map((item, index) => {*/}
+            {/*                return <li key={index}>{item}</li>*/}
+            {/*            }*/}
+            {/*        )}*/}
+            {/*    </ul>*/}
+
+            {/*</Box>}*/}
             {(browserState.isLoading && !browserState.isBarActive) && <Box sx={{position: 'relative'}}>
                 <Item style={{margin: '0 auto', position: 'absolute', top: '-12px', left: "50%"}}
                       onClick={isBarActive}>
                     <Avatar src={DownIcon} alt={`DownIcon`} sx={{...positionCenter, width: '10px', height: '17px'}}/>
+                </Item>
+            </Box>}
+            {(browserState.isLoading && browserState.isBarActive) && <Box sx={{position: 'relative'}}>
+                <Item style={{margin: '0 auto', position: 'absolute', top: '-12px', left: "50%", background: 'red'}}
+                      onClick={isBarInActive}>
+                    <CloseIcon sx={{...positionCenter, width: '10px', height: '17px'}}/>
                 </Item>
             </Box>}
         </>
