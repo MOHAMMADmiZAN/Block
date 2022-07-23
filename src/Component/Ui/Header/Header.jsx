@@ -5,7 +5,7 @@ import User from '../../../App/assets/svg/Icons/amir-personal.svg';
 import LeftIcon from '../../../App/assets/svg/Icons/Left.svg';
 import RightIcon from '../../../App/assets/svg/Icons/Right.svg';
 import Reload from '../../../App/assets/svg/Icons/Reload.svg';
-import HomeIcon from '../../../App/assets/svg/Icons/Home.svg';
+import HomeIcon from '../../../App/assets/svg/Icons/homeBlack.svg';
 import SearchIcon from '../../../App/assets/svg/Icons/Search.svg';
 import DownIcon from '../../../App/assets/svg/Icons/Down.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -17,6 +17,7 @@ import {useRef} from "react";
 import Index from "../../Wallet";
 import headerStyle from "./css/style.module.css";
 import ThreeDot from "../ThreeDot/ThreeDot";
+import {useState} from "react";
 
 
 const Item = styled.button`
@@ -68,6 +69,25 @@ function Header() {
     const {browserState, setBrowserState} = useContext(BrowserContextState);
     const isShowWallet = browserState.isShowWallet;
     const refWindow = useRef(window);
+
+
+    const [preview, setPreview] = useState('');
+
+
+    useEffect(() => {
+        if (!browserState.loginData.avatar) {
+            setPreview(undefined);
+            return
+        }
+        console.log(browserState.loginData);
+
+        const objectUrl = URL.createObjectURL(browserState.loginData.avatar)
+        setPreview(objectUrl)
+
+
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [browserState.loginData.avatar])
+
 
 
     const handlePress = (e) => {
@@ -126,6 +146,14 @@ function Header() {
             isClose: false
         })
     }
+    // sidebar
+    const handleClickSidebar = () => {
+        setBrowserState({
+            ...browserState,
+            isSideBarOpen: !browserState.isSideBarOpen,
+            isClose: true
+        })
+    }
 
     return (
         <>
@@ -164,7 +192,7 @@ function Header() {
                                                                           width: '20px',
                                                                           height: '20px'
                                                                       }}/></Item>
-                            {browserState.isAuth && <Item><Avatar src={User} alt={`User`}
+                            {browserState.isAuth && <Item onClick={handleClickSidebar}><Avatar src={preview} alt={preview}
                                                                    sx={{
                                                                        ...positionCenter,
                                                                        width: '100%',
@@ -175,25 +203,7 @@ function Header() {
                     </Grid>
                     {!browserState.isClose&& <ThreeDot/>}
                 </Box>}
-            {/*{(browserState.isHistory && browserState.searchHistory.length > 0) && <Box sx={*/}
-            {/*    {*/}
-            {/*        width: '100%',*/}
-            {/*        maxWidth: '800px',*/}
-            {/*        height: '500px',*/}
-            {/*        background: 'linear-gradient(360deg, rgba(239, 248, 255, 0.9) 0%, rgba(17, 29, 20, 0.2) 50%, rgba(239, 248, 255, 0.9) 100%)',*/}
-            {/*        margin: '0 auto',*/}
-            {/*        borderRadius: '20px',*/}
-            {/*        padding: '20px',*/}
-            {/*    }*/}
-            {/*}>*/}
-            {/*    <ul>*/}
-            {/*        {browserState.searchHistory.map((item, index) => {*/}
-            {/*                return <li key={index}>{item}</li>*/}
-            {/*            }*/}
-            {/*        )}*/}
-            {/*    </ul>*/}
 
-            {/*</Box>}*/}
             {(browserState.isLoading && !browserState.isBarActive) && <Box sx={{position: 'relative'}}>
                 <Item style={{margin: '0 auto', position: 'absolute', top: '-12px', left: "50%"}}
                       onClick={isBarActive}>

@@ -7,9 +7,16 @@ import styled from "styled-components"
 import PlusIcon from '../../../App/assets/svg/Icons/plus.svg';
 import CloseIcon from '../../../App/assets/svg/Icons/Close.svg';
 import CheckIcon from '../../../App/assets/svg/Icons/Rectangle.svg';
+import CheckActiveIcon from '../../../App/assets/svg/Icons/checkActive.svg';
 import MetaMask from '../../../App/assets/svg/Icons/MetaMask_Fox.svg';
 import Google from '../../../App/assets/svg/Icons/google.svg';
-
+import OverLaySection from "../../Shared/Ui/OverLaySection";
+import ImageAddBtn from "../../Shared/Form/ImageAddBtn";
+import FormInputGroup from "../../Shared/Form/FormInputGroup";
+import FormLink from "../../Shared/Form/FormLink";
+import Form0Auth from "../../Shared/Form/Form0Auth";
+import FormBtnLg from "../../Shared/Form/FormBtnLg";
+import {useEffect, useState} from "react";
 const TitleText = styled.h1`
   font-size: 24px;
   color: rgba(250, 250, 251, 0.6);
@@ -56,161 +63,161 @@ const FormBox = styled.div`
   border-radius: 15px;
 
 `
-const ProfileAddStyle = {
-    width: '70px',
-    height: '70px',
-    borderRadius: '10px',
-    border: '1px solid #000',
-}
+
 const IconButton = styled.img`
   cursor: pointer;
 `
 
-const FormInputGroup = styled.div`
-  position: relative;
-  padding: 20px 0;
-`
-const FormLabel = styled.label`
-  font-size: 13px;
-  color: #fff;
-  font-weight: 300;
-  padding: 2px 5px;
-  background: #000;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  min-width: 70%;
-  position: absolute;
-  top: 8px;
-`
-const FormInput = styled.input`
-  width: 100%;
-  padding: 20px;
-  border: 1px solid #000;
-  border-radius: 5px;
-  background: transparent;
-  outline: none;
-`
-const FormLink = styled.a`
-  color: #0683FF;
-`
-const FormOAuth = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 0;
-`
-const FormButtonLarge = styled.button`
-  width: 100%;
-  border-radius: 20px;
-  margin-top: 10px;
-  background: #0683FF;
-  color: #fff;
-  font-size: 20px;
-  text-transform: uppercase;
-  padding: 10px;
+const init = {
+    firstName: 'Sama',
+    lastName: 'Zain',
+    email: 'samazain@gmail.com',
+    password: '12345678',
+    confirmPassword: '12345678',
+}
 
-`
 
 function SignUp() {
+
     const {browserState, setBrowserState} = useContext(BrowserContextState);
+    const [preview, setPreview] = useState('');
+    const [formData, setFormData] = useState(init);
+    const [checked, setChecked] = useState(false);
+    const [file, setFile] = useState(null);
+    const handleOffClick = () => {
+        setBrowserState({...browserState, isSignup: false});
+        console.log(browserState);
+    }
+    useEffect(() => {
+        if (!file) {
+            setPreview('')
+            return
+        }
+
+        const objectUrl = URL.createObjectURL(file)
+        setPreview(objectUrl)
+
+        console.log(objectUrl)
+
+
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [file])
+
+
+    const handleImage = (e) => {
+        setFile(e.target.files[0])
+    }
+    const handleChange = (e) => {
+        console.log(e.target.value)
+        console.log(e.target.id)
+      setFormData({...formData, [e.target.id]: e.target.value})
+        console.log(formData);
+
+    }
+    const handleCheck = () => {
+        setChecked(!checked)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (checked){
+            setBrowserState({...browserState, signUpData: {...formData, image: file},isSignup: false ,isSignUpSuccess: true})
+            console.log(browserState);
+        }
+    }
+
     return (
         <>
-            <Box className={SignupCss.containerFluid} style={{display: browserState.isSignup ? 'block' : 'none'}}>
-                <Container maxWidth={`xl`} sx={{height: '100vh', position: 'relative'}}>
-                    <ContentSection>
-                        <TitleText>Welcome to AZAL WEB3 browser!</TitleText>
-                        <ContentMainBox>
-                            <Grid container={true}>
-                                <Grid item={true} xs={6} lg={6} md={6} sm={6} xl={6}>
-                                    <ContentMainBoxP>Create New Account</ContentMainBoxP>
-                                </Grid>
-                                <Grid item={true} xs={6} lg={6} md={6} sm={2} xl={6}>
-                                    <ContentMainBoxClose>
-                                        <IconButton src={CloseIcon} alt={CloseIcon}/>
-                                        <ContentMainBoxP>Cancel</ContentMainBoxP>
+            <OverLaySection isOpen={browserState.isSignup}>
+                <ContentSection>
+                    <TitleText>Welcome to AZAL WEB3 browser!</TitleText>
+                    <ContentMainBox>
+                        <Grid container={true}>
+                            <Grid item={true} xs={6} lg={6} md={6} sm={6} xl={6}>
+                                <ContentMainBoxP>Create New Account</ContentMainBoxP>
+                            </Grid>
+                            <Grid item={true} xs={6} lg={6} md={6} sm={2} xl={6}>
+                                <ContentMainBoxClose onClick={handleOffClick}>
+                                    <IconButton src={CloseIcon} alt={CloseIcon}/>
+                                    <ContentMainBoxP>Cancel</ContentMainBoxP>
 
-                                    </ContentMainBoxClose>
+                                </ContentMainBoxClose>
+                            </Grid>
+                        </Grid>
+
+                        <FormBox>
+                            <Grid container={true} alignItems={`center`}>
+                                <Grid item={true}>
+                                    <ImageAddBtn change={handleImage}>
+                                        {(preview && file) && <img src={preview} alt={preview} style={{
+                                            width: '70px',
+                                            height: '70px',
+                                            borderRadius: '10px',
+                                            border: '1px solid #000',
+                                        }}/>}
+                                    </ImageAddBtn>
+                                </Grid>
+                                <Grid item={true}><ContentMainBoxP>Add Profile
+                                    Photo</ContentMainBoxP></Grid>
+                            </Grid>
+                            <Grid container={true} alignItems={`center`} spacing={2} style={{marginTop: '20px'}}
+                                  rowSpacing={0}>
+                                <Grid item={true} lg={6} xl={6} md={6} sm={6}>
+                                    <FormInputGroup label={`First Name`} name={`firstName`} type={`text`}
+                                                    placeholder={`Your First Name`} onChange={handleChange} value={formData.firstName}/>
+                                </Grid>
+                                <Grid item={true} lg={6} xl={6} md={6} sm={6}>
+                                    <FormInputGroup label={`Last Name`} name={`lastName`} type={`text`}
+                                                    placeholder={`Your Last Name`} onChange={handleChange} value={formData.lastName}/>
+                                </Grid>
+                                <Grid item={true} lg={12} xl={12} md={12} sm={12}>
+                                    <FormInputGroup label={`Email Address`} name={`email`} type={`text`}
+                                                    placeholder={`example@domain.com`} onChange={handleChange} value={formData.email}/>
+
+                                </Grid>
+                                <Grid item={true} lg={6} xl={6} md={6} sm={6}>
+                                    <FormInputGroup label={`Password`} name={`password`} type={`password`}
+                                                    placeholder={`Your Password`} onChange={handleChange} value={formData.password}/>
+                                </Grid>
+                                <Grid item={true} lg={6} xl={6} md={6} sm={6}>
+                                    <FormInputGroup label={`Confirm Password`} name={`confirmPassword`}
+                                                    type={`password`} placeholder={`Confirm Password`}
+                                                    onChange={handleChange} value={formData.confirmPassword}/>
                                 </Grid>
                             </Grid>
-
-                            <FormBox>
-                                <Grid container={true} alignItems={`center`}>
-                                    <Grid item={true}>
-                                        <Button variant="outlined" component="label" sx={{...ProfileAddStyle}}>
-                                            <img src={PlusIcon} alt={PlusIcon}/>
-                                            <input hidden accept="image/*" multiple type="file"/>
-                                        </Button>
-                                    </Grid>
-                                    <Grid item={true}><ContentMainBoxP>Add Profile
-                                        Photo</ContentMainBoxP></Grid>
-                                </Grid>
-                                <Grid container={true} alignItems={`center`} spacing={2} style={{marginTop: '20px'}}
-                                      rowSpacing={0}>
-                                    <Grid item={true} lg={6} xl={6} md={6} sm={6}>
-                                        <FormInputGroup>
-                                            <FormLabel>First Name</FormLabel>
-                                            <FormInput type="text" placeholder="Your First Name..."/>
-                                        </FormInputGroup>
-                                    </Grid>
-                                    <Grid item={true} lg={6} xl={6} md={6} sm={6}>
-                                        <FormInputGroup>
-                                            <FormLabel>Last Name</FormLabel>
-                                            <FormInput type="text" placeholder="Your Last Name..."/>
-                                        </FormInputGroup>
-                                    </Grid>
-                                    <Grid item={true} lg={12} xl={12} md={12} sm={12}>
-                                        <FormInputGroup>
-                                            <FormLabel>Email Address</FormLabel>
-                                            <FormInput type="text" placeholder="example@domain.com"/>
-                                        </FormInputGroup>
-                                    </Grid>
-                                    <Grid item={true} lg={6} xl={6} md={6} sm={6}>
-                                        <FormInputGroup>
-                                            <FormLabel>Password</FormLabel>
-                                            <FormInput type="password" placeholder=" Type PassWord"/>
-                                        </FormInputGroup>
-                                    </Grid>
-                                    <Grid item={true} lg={6} xl={6} md={6} sm={6}>
-                                        <FormInputGroup>
-                                            <FormLabel>Confirm Password</FormLabel>
-                                            <FormInput type="text" placeholder="Type Confirm PassWord"/>
-                                        </FormInputGroup>
-                                    </Grid>
-                                </Grid>
-                                <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                    <IconButton src={CheckIcon} alt={CheckIcon}/>
-                                    <ContentMainBoxP>I agree to the <FormLink>Terms and
-                                        Conditions</FormLink> and <FormLink>Privacy Policy</FormLink>.</ContentMainBoxP>
-                                </Box>
-                                <FormOAuth>
-                                    <IconButton src={MetaMask} alt={MetaMask} style={{
-                                        width: '49px',
-                                        height: '49px',
-                                        borderRadius: '50%',
-                                        background: '#000'
-                                    }}/>
-                                    <ContentMainBoxP style={{padding: '0 10px'}}>or</ContentMainBoxP>
-                                    <IconButton src={Google} alt={Google} style={{
-                                        width: '49px',
-                                        height: '49px',
-                                        borderRadius: '50%',
-                                        background: '#000'
-                                    }}/>
-                                </FormOAuth>
-                                <Box sx={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                    marginTop: '20px'
-                                }}>
-                                    <ContentMainBoxP>Do you have an account already? <FormLink>Login.</FormLink></ContentMainBoxP>
-                                </Box>
-                            </FormBox>
-                        </ContentMainBox>
-                        <FormButtonLarge>Sign UP</FormButtonLarge>
-                    </ContentSection>
-                </Container>
-            </Box>
+                            <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                <IconButton src={checked?CheckActiveIcon:CheckIcon} alt={checked?CheckActiveIcon:CheckIcon} onClick={handleCheck}/>
+                                <ContentMainBoxP>I agree to the <FormLink>Terms and
+                                    Conditions</FormLink> and <FormLink>Privacy Policy</FormLink>.</ContentMainBoxP>
+                            </Box>
+                            <Form0Auth>
+                                <IconButton src={MetaMask} alt={MetaMask} style={{
+                                    width: '49px',
+                                    height: '49px',
+                                    borderRadius: '50%',
+                                    background: '#000'
+                                }}/>
+                                <ContentMainBoxP style={{padding: '0 10px'}}>or</ContentMainBoxP>
+                                <IconButton src={Google} alt={Google} style={{
+                                    width: '49px',
+                                    height: '49px',
+                                    borderRadius: '50%',
+                                    background: '#000'
+                                }}/>
+                            </Form0Auth>
+                            <Box sx={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                marginTop: '20px'
+                            }}>
+                                <ContentMainBoxP>Do you have an account
+                                    already? <FormLink>Login.</FormLink></ContentMainBoxP>
+                            </Box>
+                        </FormBox>
+                    </ContentMainBox>
+                    <FormBtnLg onClick={handleSubmit}>Sign UP</FormBtnLg>
+                </ContentSection>
+            </OverLaySection>
 
         </>
     );

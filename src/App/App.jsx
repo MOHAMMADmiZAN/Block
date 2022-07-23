@@ -6,6 +6,9 @@ import {createGlobalStyle} from "styled-components";
 import BrowserContext from "../Context/BrowserContext";
 import Frame from "../Component/Ui/Frame/Frame";
 import SignUp from "../Component/Ui/SignUp/SignUp";
+import SuccessSignUp from "../Component/Ui/SignUp/SuccessSignUp";
+import Login from "../Component/Ui/Login/Login";
+import UserSideBar from "../Component/Ui/User/UserSideBar";
 
 const GlobalStyle = createGlobalStyle`
   img {
@@ -22,6 +25,9 @@ function App() {
                 <Header/>
                 <Frame/>
                 <SignUp/>
+                <SuccessSignUp/>
+                <Login/>
+                <UserSideBar/>
 
             </div>
         </BrowserContext>

@@ -17,6 +17,10 @@ const initial = {
     isSignup: false,
     isSettings: false,
     isClose: true,
+    signUpData: {},
+    isSignUpSuccess: false,
+    loginData: {},
+    isSideBarOpen: false,
 }
 
 function BrowserContext({children}) {
