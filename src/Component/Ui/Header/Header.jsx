@@ -1,19 +1,22 @@
 import {Avatar, Box, Grid} from "@mui/material";
 import styled from "styled-components";
-import MetaMask from '../../App/assets/svg/Icons/metamask-bw-2.svg';
-import User from '../../App/assets/svg/Icons/amir-personal.svg';
-import LeftIcon from '../../App/assets/svg/Icons/Left.svg';
-import RightIcon from '../../App/assets/svg/Icons/Right.svg';
-import Reload from '../../App/assets/svg/Icons/Reload.svg';
-import HomeIcon from '../../App/assets/svg/Icons/Home.svg';
-import SearchIcon from '../../App/assets/svg/Icons/Search.svg';
-import DownIcon from '../../App/assets/svg/Icons/Down.svg';
+import MetaMask from '../../../App/assets/svg/Icons/MetaMask_Fox.svg';
+import User from '../../../App/assets/svg/Icons/amir-personal.svg';
+import LeftIcon from '../../../App/assets/svg/Icons/Left.svg';
+import RightIcon from '../../../App/assets/svg/Icons/Right.svg';
+import Reload from '../../../App/assets/svg/Icons/Reload.svg';
+import HomeIcon from '../../../App/assets/svg/Icons/Home.svg';
+import SearchIcon from '../../../App/assets/svg/Icons/Search.svg';
+import DownIcon from '../../../App/assets/svg/Icons/Down.svg';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical} from '@fortawesome/free-solid-svg-icons'
 import CloseIcon from '@mui/icons-material/Close';
 import {useContext, useEffect} from "react";
-import {BrowserContextState} from "../../Context/BrowserContext";
+import {BrowserContextState} from "../../../Context/BrowserContext";
 import {useRef} from "react";
+import Index from "../../Wallet";
+import headerStyle from "./css/style.module.css";
+import ThreeDot from "../ThreeDot/ThreeDot";
 
 
 const Item = styled.button`
@@ -60,12 +63,12 @@ const positionCenter = {
 
 }
 
+
 function Header() {
     const {browserState, setBrowserState} = useContext(BrowserContextState);
+    const isShowWallet = browserState.isShowWallet;
     const refWindow = useRef(window);
-    useEffect(() => {
-        console.log(browserState)
-    }, [])
+
 
     const handlePress = (e) => {
         if (e.key === 'Enter') {
@@ -109,12 +112,25 @@ function Header() {
             currentPage: "https://rattan-house.store/rattan-house-vtour/"
         })
     }
-
+    // wallet //
+    const handleClickWallet = () => {
+        setBrowserState({
+            ...browserState,
+            isShowWallet: !isShowWallet
+        })
+    }
+    // threeDot Popup //
+    const handleClickThreeDot = () => {
+        setBrowserState({
+            ...browserState,
+            isClose: false
+        })
+    }
 
     return (
         <>
             {(!browserState.isLoading || browserState.isBarActive) &&
-                <Box sx={{background: 'rgba(239,248,255,0.2)', height: '50px', width: '100%'}}>
+                <Box className={headerStyle.headerTop}>
                     <Grid container sx={{height: '100%'}}>
                         <Grid item lg={3} xs={3} sm={3} xl={3} md={3}>
                             <Item><Avatar src={LeftIcon} sx={{...positionCenter, width: '10px', height: '17px'}}/>
@@ -131,7 +147,7 @@ function Header() {
                         </Grid>
                         <Grid item lg={6} xs={6} sm={6} xl={6} md={6} sx={{position: 'relative'}}>
                             <SearchInput onKeyPress={handlePress} defaultValue={browserState.currentPage}
-                                         onFocus={handleOnFocus} onBlur={handleOnBlur}/>
+                                         onFocus={handleOnFocus} onBlur={handleOnBlur} placeholder="Your text here"/>
                             <Avatar src={SearchIcon} sx={{
                                 ...positionCenter,
                                 width: '20px',
@@ -142,14 +158,22 @@ function Header() {
                             }}/>
                         </Grid>
                         <Grid item lg={3} xs={3} sm={3} xl={3} md={3} sx={{textAlign: 'right'}}>
-                            <Item><Avatar src={MetaMask} alt={`Metamask`}
-                                          sx={{...positionCenter, width: '20px', height: '20px'}}/></Item>
-                            <Item><Avatar src={User} alt={`User`}
-                                          sx={{...positionCenter, width: '100%', height: '100%'}}/></Item>
-                            <Item><FontAwesomeIcon icon={faEllipsisVertical} style={{...positionCenter}}/></Item>
-
+                            <Item onClick={handleClickWallet}><Avatar src={MetaMask} alt={`Metamask`}
+                                                                      sx={{
+                                                                          ...positionCenter,
+                                                                          width: '20px',
+                                                                          height: '20px'
+                                                                      }}/></Item>
+                            {browserState.isAuth && <Item><Avatar src={User} alt={`User`}
+                                                                   sx={{
+                                                                       ...positionCenter,
+                                                                       width: '100%',
+                                                                       height: '100%'
+                                                                   }}/></Item>}
+                            <Item onClick={handleClickThreeDot}><FontAwesomeIcon icon={faEllipsisVertical} style={{...positionCenter}}/></Item>
                         </Grid>
                     </Grid>
+                    {!browserState.isClose&& <ThreeDot/>}
                 </Box>}
             {/*{(browserState.isHistory && browserState.searchHistory.length > 0) && <Box sx={*/}
             {/*    {*/}
@@ -181,6 +205,9 @@ function Header() {
                       onClick={isBarInActive}>
                     <CloseIcon sx={{...positionCenter, width: '10px', height: '17px'}}/>
                 </Item>
+            </Box>}
+            {browserState.isShowWallet && <Box sx={{position: 'fixed', top: '51px', right: '10px'}}>
+                <Index/>
             </Box>}
         </>
     );

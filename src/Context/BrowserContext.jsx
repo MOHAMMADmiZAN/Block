@@ -7,10 +7,16 @@ const initial = {
     isFrameReloading: " ",
     demoSiteUniqueId: '#helloWorld',
     currentPage: " ",
-    previousPage: " ",
-    nextPage: " ",
+    recentSessionPages: [],
     searchHistory: ['www.google.com', 'www.facebook.com', 'www.youtube.com'],
     isHistory: false,
+    isShowWallet: false,
+    walletAddress: "",
+    isAuth: false,
+    isLogin: false,
+    isSignup: false,
+    isSettings: false,
+    isClose: true,
 }
 
 function BrowserContext({children}) {
