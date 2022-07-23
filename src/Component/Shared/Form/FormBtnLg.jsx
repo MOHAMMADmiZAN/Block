@@ -10,7 +10,7 @@ const FormButtonLarge = styled.button`
   text-transform: uppercase;
   padding: 10px;
   cursor: pointer;
-    border: none;
+  border: none;
   outline: none;
 
 `

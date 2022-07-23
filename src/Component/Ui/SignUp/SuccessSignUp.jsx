@@ -86,6 +86,7 @@ function SuccessSignUp() {
                 loginPassword: browserState.signUpData.password,
                 avatar: browserState.signUpData.image,
                 firstName: browserState.signUpData.firstName,
+                lastName: browserState.signUpData.lastName,
             }
         });
     }

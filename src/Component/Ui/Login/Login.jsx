@@ -3,7 +3,7 @@ import {Box, Grid} from "@mui/material";
 import CloseIcon from "../../../App/assets/svg/Icons/close.svg";
 import FormInputGroup from "../../Shared/Form/FormInputGroup";
 import CheckActiveIcon from "../../../App/assets/svg/Icons/checkActive.svg";
-import CheckIcon from "../../../App/assets/svg/Icons/Rectangle.svg";
+import CheckIcon from "../../../App/assets/svg/Icons/Check.svg";
 import FormLink from "../../Shared/Form/FormLink";
 import Form0Auth from "../../Shared/Form/Form0Auth";
 import MetaMaskIcon from "../../../App/assets/svg/Icons/MetaMask_Fox.svg";

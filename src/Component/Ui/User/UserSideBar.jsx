@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, Container, Grid} from "@mui/material";
+import {Button, Container, Grid, Typography} from "@mui/material";
 import {useContext} from "react";
 import {BrowserContextState} from "../../../Context/BrowserContext";
 import styled from "styled-components";
@@ -17,6 +17,17 @@ import UploadIcon from '../../../App/assets/svg/Icons/Upload.svg';
 import UploadActiveIcon from '../../../App/assets/svg/Icons/UploadActive.svg';
 import SettingIcon from '../../../App/assets/svg/Icons/Setting.svg';
 import SettingActiveIcon from '../../../App/assets/svg/Icons/SettingAcive.svg';
+import LogoutIcon from '../../../App/assets/svg/Icons/Logout.svg';
+import FormLink from "../../Shared/Form/FormLink";
+import GroupShopIcon from '../../../App/assets/svg/Icons/GroupShop.svg';
+import GroupGroceryIcon from '../../../App/assets/svg/Icons/GroupGrocery.svg';
+import GroupWorkIcon from '../../../App/assets/svg/Icons/GroupWork.svg';
+import GroupFunIcon from '../../../App/assets/svg/Icons/GroupFun.svg';
+import GroupRandomIcon from '../../../App/assets/svg/Icons/GroupRandom.svg';
+import Member1Icon from '../../../App/assets/svg/avatar/m1.svg';
+import Member2Icon from '../../../App/assets/svg/avatar/m2.svg';
+import Member3Icon from '../../../App/assets/svg/avatar/m3.svg';
+import Member4Icon from '../../../App/assets/svg/avatar/m4.svg';
 
 
 const SideBarComponent = styled.div`
@@ -37,11 +48,12 @@ const SideBarAvatar = styled.div`
   border-radius: 50%;
   margin: 0 auto;
   position: relative;
+
 `
 const SideBarAvatarImg = styled.img`
-  width: 100%;
-  height: 100%;
-  border-radius: 50px;
+  width: ${props => props.large ? '70px' : '40px'};
+  height: ${props => props.large ? '70px' : '40px'};
+  border-radius: 50%;
   position: relative;
 
 `
@@ -61,16 +73,71 @@ const OnlineLight = styled.div`
 `
 const MenuItems = styled.ul`
   position: absolute;
-  bottom: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 `
 const MenuItem = styled.li`
   margin: 20px 0;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   position: relative;
+  cursor: pointer;
+`
+const UserTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const UserTitleP = styled.p`
+  font-size: 15px;
+  font-weight: 500;
+
+`
+const UserTitleSpan = styled.span`
+  font-size: 11px;
+`
+const UserSocialItems = styled.ul`
+`
+const UserSocialItem = styled.li`
+  display: inline-block;
+  padding: 10px;
+
+`
+const UserSocial = styled.div`
+
+`
+const Divider = styled.div`
+  width: 100%;
+  height: 1px;
+  background: #979797;
+  margin-top: 30px;
+`
+const UsersGroup = styled.div`
+  padding: 15px;
+`
+const UserGroupTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const UserGroupContent = styled.div`
+  margin-top: 15px;
+`
+
+
+const UserGroupThumbnail = styled.img`
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+`
+const UserGroupMember = styled.div`
+  width: 30px;
+  height: 30px;
+  border: 1px solid #979797;
+  border-radius: 50%;
 `
 
 const MenuInIt = [
@@ -112,6 +179,146 @@ const MenuInIt = [
     }
 
 ]
+const UserSocialData = [
+    {
+        label: 'Followers',
+        value: '32.5k'
+
+    },
+    {
+        label: 'Following',
+        value: '50'
+    },
+    {
+        label: 'Friends',
+        value: '50'
+    }
+]
+
+const userGroupData = [
+    {
+        title: 'Shopping',
+        thumbnail: GroupShopIcon,
+        lastChatDate: 'June 19, 2021',
+        id: 1,
+        members: [
+            {
+                name: 'John Doe',
+                avatar: Member1Icon,
+                id: 1
+            },
+            {
+                name: 'John Doe',
+                avatar: Member2Icon,
+                id: 2
+            },
+            {
+                name: 'John Doe',
+                avatar: Member3Icon,
+                id: 3
+            },
+            {
+                name: 'John Doe',
+                avatar: Member4Icon,
+                id: 4
+            },
+
+
+        ]
+    },
+    {
+        title: 'Grocery',
+        thumbnail: GroupGroceryIcon,
+        lastChatDate: 'June 21, 2021',
+        id: 1,
+        members: [
+            {
+                name: 'John Doe',
+                avatar: Member1Icon,
+                id: 1
+            },
+            {
+                name: 'John Doe',
+                avatar: Member2Icon,
+                id: 2
+            },
+            {
+                name: 'John Doe',
+                avatar: Member3Icon,
+                id: 3
+            },
+            {
+                name: 'John Doe',
+                avatar: Member4Icon,
+                id: 4
+            },
+
+
+        ]
+    },
+    {
+        title: 'Work',
+        thumbnail: GroupWorkIcon,
+        lastChatDate: 'June 21, 2022',
+        id: 1,
+        members: [
+            {
+                name: 'John Doe',
+                avatar: Member1Icon,
+                id: 1
+            },
+            {
+                name: 'John Doe',
+                avatar: Member2Icon,
+                id: 2
+            },
+            {
+                name: 'John Doe',
+                avatar: Member3Icon,
+                id: 3
+            },
+            {
+                name: 'John Doe',
+                avatar: Member4Icon,
+                id: 4
+            },
+
+
+        ]
+    },
+    {
+        title: 'Fun',
+        thumbnail: GroupFunIcon,
+        lastChatDate: 'June 25, 2021',
+        id: 1,
+        members: [
+            {
+                name: 'John Doe',
+                avatar: Member1Icon,
+                id: 1
+            },
+            {
+                name: 'John Doe',
+                avatar: Member2Icon,
+                id: 2
+            },
+            {
+                name: 'John Doe',
+                avatar: Member3Icon,
+                id: 3
+            },
+            {
+                name: 'John Doe',
+                avatar: Member4Icon,
+                id: 4
+            },
+
+
+        ]
+    },
+
+
+]
 
 
 function UserSideBar() {
@@ -120,7 +327,8 @@ function UserSideBar() {
     const [menu, setMenu] = useState(MenuInIt);
 
 
-    const handleMenuClick = (e,id) => {
+    const handleMenuClick = (e, id) => {
+        console.log(import.meta.env.APP_NAME);
         setMenu(menu.map(item => {
             item.isActive = item.id === id;
             return item;
@@ -145,6 +353,83 @@ function UserSideBar() {
         <>
             <Container sx={{display: browserState.isSideBarOpen ? 'block' : 'none'}}>
                 <SideBarComponent large>
+                    <SideBarAvatar large>
+                        <SideBarAvatarImg src={preview} large/>
+                    </SideBarAvatar>
+                    <UserTitle><UserTitleP>@{browserState.loginData.firstName + browserState.loginData.lastName}</UserTitleP><IconBtn
+                        src={LogoutIcon} style={{marginLeft: '10px'}}/></UserTitle>
+                    <UserTitleSpan>Dubai,UAE</UserTitleSpan>
+
+                    <UserSocialItems>
+                        {UserSocialData.map(item => {
+                            return (
+                                <UserSocialItem key={item.label}>
+                                    <UserSocial>
+                                        <UserTitleP>{item.label}</UserTitleP>
+                                        <span style={{color: 'rgba(0,0,0,0.4)', fontWeight: '400'}}>{item.value}</span>
+                                    </UserSocial>
+                                </UserSocialItem>
+                            )
+                        })
+                        }
+                    </UserSocialItems>
+                    <Divider/>
+
+                    <Button variant="contained"
+                            sx={{borderRadius: '20px', margin: '15px 0 10px 0', background: '#0683FF', width: 220}}
+                            size={`large`}>New Group Trip</Button>
+                    <Typography paragraph={true} sx={{color: 'rgba(0,0,0,0.4)', fontWeight: '400', fontSize: '11px'}}>Go
+                        anywhere in the Web3 with your friends</Typography>
+
+
+                    <UsersGroup>
+                        <UserGroupTitle>
+                            <Typography variant={`h6`}>
+                                Recently used groups
+                            </Typography>
+                            <FormLink>View ALL</FormLink>
+                        </UserGroupTitle>
+                        <UserGroupContent>
+                            {userGroupData.map(item => {
+                                return (
+                                    <Grid container={true} key={item.id} sx={{padding:'10px 0', borderBottom:'1px solid #000'}}>
+                                        <Grid item xs={3} sm={6} md={3} lg={3}>
+                                            <UserGroupThumbnail src={item.thumbnail}/>
+
+                                        </Grid>
+                                        <Grid item xs={9} sm={6} md={9} lg={9}>
+                                            <Grid container={true} alignItems={`center`}>
+                                                <Grid item xs={12} sm={12} md={6} lg={6}>
+                                                    <Typography variant={`h6`}>{item.title}</Typography>
+                                                </Grid>
+                                                <Grid item xs={12} sm={12} md={6} lg={6}>
+                                                    <Typography pragraph>{item.lastChatDate}</Typography>
+                                                </Grid>
+                                            </Grid>
+                                            <Grid container={true} alignItems={`center`} sx={{marginTop: '10px'}}>
+                                                {item.members.map(member => {
+                                                    return (
+                                                        <Grid item xs={3} sm={3} md={2} lg={2} key={member.id}>
+                                                            <UserGroupMember>
+                                                                <IconBtn src={member.avatar}
+                                                                         style={{width: '100%', height: '100%'}}/>
+                                                            </UserGroupMember>
+
+                                                        </Grid>
+                                                    )
+                                                })
+                                                }
+                                            </Grid>
+                                        </Grid>
+
+                                    </Grid>
+
+
+                                )
+                            })}
+                        </UserGroupContent>
+                    </UsersGroup>
+
 
                 </SideBarComponent>
                 <SideBarComponent>
@@ -154,7 +439,7 @@ function UserSideBar() {
                         <OnlineLight/>
                     </SideBarAvatar>
                     <IconBtn src={SideMenuIcon} style={{marginTop: '15px'}}/>
-                    <MenuItems >
+                    <MenuItems>
                         {menu.map((item, index) => {
                             return (
                                 <MenuItem key={index} style={{background: item.isActive ? '#0683FF' : ''}}>
@@ -163,11 +448,7 @@ function UserSideBar() {
                                         top: '50%',
                                         left: '50%',
                                         transform: 'translate(-50%,-50%)',
-
-
-
-
-                                    }} onClick={(e) => handleMenuClick(e,item.id)}/>
+                                    }} onClick={(e) => handleMenuClick(e, item.id)}/>
                                 </MenuItem>
                             )
 

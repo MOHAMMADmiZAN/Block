@@ -6,7 +6,7 @@ import {BrowserContextState} from "../../../Context/BrowserContext";
 import styled from "styled-components"
 import PlusIcon from '../../../App/assets/svg/Icons/plus.svg';
 import CloseIcon from '../../../App/assets/svg/Icons/Close.svg';
-import CheckIcon from '../../../App/assets/svg/Icons/Rectangle.svg';
+import CheckIcon from '../../../App/assets/svg/Icons/Check.svg';
 import CheckActiveIcon from '../../../App/assets/svg/Icons/checkActive.svg';
 import MetaMask from '../../../App/assets/svg/Icons/MetaMask_Fox.svg';
 import Google from '../../../App/assets/svg/Icons/google.svg';
