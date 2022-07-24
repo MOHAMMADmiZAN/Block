@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import close from '../../../App/assets/svg/Icons/close.svg';
 
@@ -73,23 +73,31 @@ function ThreeDot() {
     const {browserState, setBrowserState} = useContext(BrowserContextState);
 
 
+
+
     const handleClick = (e) => {
         let {id} = e.target;
         if (id === 'Login') {
             setBrowserState({
                 ...browserState,
                 isLogin: true,
+                isSignup: false,
+                isClose: true,
+
             })
 
         } else if (id === 'Signup') {
             setBrowserState({
                 ...browserState,
                 isSignup: true,
+                isLogin: false,
+                isClose: true,
             })
         } else if (id === 'Settings') {
             setBrowserState({
                 ...browserState,
                 isSettings: true,
+                isClose: true,
             })
         }
         else if (id === 'Close') {
@@ -98,7 +106,7 @@ function ThreeDot() {
                 isClose: true,
             })
         }
-        console.log(browserState)
+
     }
 
 

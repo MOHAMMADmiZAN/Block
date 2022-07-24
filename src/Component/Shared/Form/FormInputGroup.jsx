@@ -35,10 +35,28 @@ const ErrorMessage = styled.div`
   color: red;
 `;
 
+const FromSelectGroupComponent = styled.div`
+  position: relative;
+  padding: 20px 0;
+`
+const FormSelect = styled.select`
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: transparent;
+  outline: none;
+  color: #92929D;
+`
+const FormOption = styled.option`
+
+`
+
 function FormInputGroup({
                             label,
                             name,
                             value,
+                            defaultValue,
                             type,
                             placeholder,
                             error,
@@ -58,7 +76,9 @@ function FormInputGroup({
                            error={error}
                            id={name}
                            type={type}
+                           defaultValue={defaultValue}
                 />
+
                 {error && <ErrorMessage>{error}</ErrorMessage>}
             </FormInputGroupComponent>
         </>

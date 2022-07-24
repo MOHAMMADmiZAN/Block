@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1342" height="82" viewBox="0 0 1342 82">
+  <defs>
+    <filter id="Bg" x="0" y="0" width="1342" height="82" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Reply" transform="translate(6 5)">
+    <g id="Bg-2" data-name="Bg">
+      <g transform="matrix(1, 0, 0, 1, -6, -5)" filter="url(#Bg)">
+        <path id="Bg-3" data-name="Bg" d="M5,0H1325a5,5,0,0,1,5,5V65a5,5,0,0,1-5,5H5a5,5,0,0,1-5-5V5A5,5,0,0,1,5,0Z" transform="translate(6 5)" fill="#292e33"/>
+      </g>
+      <path id="Separator" d="M0,0H1V70H0Z" transform="translate(1260)" fill="#33393f"/>
+    </g>
+    <text id="Type_to_reply..." data-name="Type to reply..." transform="translate(42 39)" fill="#748aa1" font-size="14" font-family="SegoeUI, Segoe UI"><tspan x="0" y="0">Type to reply...</tspan></text>
+    <g id="Attachment_Icon" data-name="Attachment Icon" transform="translate(1212.038 25.336)">
+      <path id="Fill_501" data-name="Fill 501" d="M15.833,1.355a5.11,5.11,0,0,0-7.12.186L.737,9.518A.8.8,0,1,0,1.869,10.65L9.881,2.638A3.479,3.479,0,0,1,14.6,2.4a3.4,3.4,0,0,1,.168,4.966l-9.76,9.758a2,2,0,1,1-2.828-2.829l9.192-9.2a.6.6,0,1,1,.848.849L3.857,14.312a.8.8,0,0,0,1.132,1.131l8.368-8.369A2.2,2.2,0,0,0,13.2,3.819a2.264,2.264,0,0,0-3.02.21L1.053,13.161a3.6,3.6,0,1,0,5.092,5.091L15.9,8.494a5,5,0,0,0-.072-7.139" fill="#b8c5d3"/>
+    </g>
+    <g id="Send_Icon" data-name="Send Icon" transform="translate(1286.028 26.002)">
+      <path id="Fill_355" data-name="Fill 355" d="M12.65,19a.822.822,0,0,1-.577-.229L.239,7.289a.776.776,0,0,1-.218-.741.8.8,0,0,1,.531-.57L18.509.042A.855.855,0,0,1,18.773,0a.821.821,0,0,1,.577.231.778.778,0,0,1,.2.815L13.423,18.464a.809.809,0,0,1-.588.515A.989.989,0,0,1,12.65,19ZM17.016,3.335,7.743,12.328,12.3,16.749ZM16.151,2.5,2.32,7.068l4.558,4.421Z" transform="translate(0 0)" fill="#0683ff"/>
+    </g>
+  </g>
+</svg>

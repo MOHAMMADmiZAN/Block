@@ -1,5 +1,5 @@
-import React from 'react';
-import {Button, Container, Grid, Typography} from "@mui/material";
+import React, {Component, useRef} from 'react';
+import {Box, Button, Container, Grid, Typography} from "@mui/material";
 import {useContext} from "react";
 import {BrowserContextState} from "../../../Context/BrowserContext";
 import styled from "styled-components";
@@ -28,6 +28,11 @@ import Member1Icon from '../../../App/assets/svg/avatar/m1.svg';
 import Member2Icon from '../../../App/assets/svg/avatar/m2.svg';
 import Member3Icon from '../../../App/assets/svg/avatar/m3.svg';
 import Member4Icon from '../../../App/assets/svg/avatar/m4.svg';
+import OverLaySection from "../../Shared/Ui/OverLaySection";
+import History from "./History";
+import Shop from "./Shop";
+import Chat from "./Chat";
+import UserSetting from "./UserSetting";
 
 
 const SideBarComponent = styled.div`
@@ -112,10 +117,11 @@ const Divider = styled.div`
   width: 100%;
   height: 1px;
   background: #979797;
-  margin-top: 30px;
+  margin-top: 10px;
 `
 const UsersGroup = styled.div`
-  padding: 15px;
+  padding: 5px 15px;
+
 `
 const UserGroupTitle = styled.div`
   display: flex;
@@ -124,7 +130,7 @@ const UserGroupTitle = styled.div`
 `
 
 const UserGroupContent = styled.div`
-  margin-top: 15px;
+  margin-top: 10px;
 `
 
 
@@ -140,6 +146,17 @@ const UserGroupMember = styled.div`
   border-radius: 50%;
 `
 
+const LogoutBtn = styled.button`
+  font-size: 24px;
+  font-weight: 600;
+  color: #979797;
+  border: none;
+  padding: 10px 15px;
+  background: transparent;
+  cursor: pointer;
+
+`
+
 const MenuInIt = [
     {
         icon: HomeIcon,
@@ -151,31 +168,36 @@ const MenuInIt = [
         icon: ClockIcon,
         activeIcon: ClockActiveIcon,
         isActive: false,
-        id: 2
+        id: 2,
+
     },
     {
         icon: ShopIcon,
         activeIcon: ShopActiveIcon,
         isActive: false,
-        id: 3
+        id: 3,
+
     },
     {
         icon: ChatIcon,
         activeIcon: ChatActiveIcon,
         isActive: false,
-        id: 4
+        id: 4,
+
     }
     , {
         icon: UploadIcon,
         activeIcon: UploadActiveIcon,
         isActive: false,
-        id: 5
+        id: 5,
+
     }
     , {
         icon: SettingIcon,
         activeIcon: SettingActiveIcon,
         isActive: false,
-        id: 6
+        id: 6 ,
+
     }
 
 ]
@@ -230,7 +252,7 @@ const userGroupData = [
         title: 'Grocery',
         thumbnail: GroupGroceryIcon,
         lastChatDate: 'June 21, 2021',
-        id: 1,
+        id: 2,
         members: [
             {
                 name: 'John Doe',
@@ -260,7 +282,7 @@ const userGroupData = [
         title: 'Work',
         thumbnail: GroupWorkIcon,
         lastChatDate: 'June 21, 2022',
-        id: 1,
+        id: 3,
         members: [
             {
                 name: 'John Doe',
@@ -290,7 +312,7 @@ const userGroupData = [
         title: 'Fun',
         thumbnail: GroupFunIcon,
         lastChatDate: 'June 25, 2021',
-        id: 1,
+        id: 4,
         members: [
             {
                 name: 'John Doe',
@@ -325,16 +347,35 @@ function UserSideBar() {
     const {browserState, setBrowserState} = useContext(BrowserContextState);
     const [preview, setPreview] = useState('');
     const [menu, setMenu] = useState(MenuInIt);
+    const largeSidebarRef = useRef(null);
+    const smallSidebarRef = useRef(null);
+    const overLayComponent = useRef(null);
 
 
     const handleMenuClick = (e, id) => {
-        console.log(import.meta.env.APP_NAME);
+
         setMenu(menu.map(item => {
             item.isActive = item.id === id;
             return item;
         }))
     }
 
+       useEffect(() => {
+           let id = 1
+          setMenu(menu.map(item => {
+             item.isActive = item.id === id;
+                return item;
+          }))
+
+
+
+
+       },[])
+     // useEffect(() => {
+     //     let minusWidth = largeSidebarRef.current.offsetWidth+smallSidebarRef.current.offsetWidth
+     //     overLayComponent.current.style.width = `calc(100% - ${minusWidth}px)`
+     //
+     // },[overLayComponent.current])
 
     useEffect(() => {
         if (!browserState.loginData.avatar) {
@@ -351,8 +392,23 @@ function UserSideBar() {
     }, [browserState.loginData.avatar])
     return (
         <>
-            <Container sx={{display: browserState.isSideBarOpen ? 'block' : 'none'}}>
-                <SideBarComponent large>
+
+            {browserState.isSideBarOpen && <Container sx={{ maxWidth:'100%',padding:'0'}}>
+
+                {!menu[0].isActive&& <Box sx={{bgcolor:'rgba(0,0,0,0.6)',width:'calc(100% - 408px)',height:'calc(100vh - 50px)',position:'absolute',left:'0',padding:'50px'}} ref={overLayComponent}>
+
+                    <Container sx={{maxWidth:'1300px',overflow:'hidden'}}>
+                        {menu[1].isActive&&<History />}
+                        {menu[2].isActive&&<Shop />}
+                        {menu[3].isActive&&<Chat />}
+                        {/*{menu[4].isActive&&<Upload />}*/}
+                        {menu[5].isActive&&<UserSetting />}
+                    </Container>
+
+
+                </Box>}
+
+                <SideBarComponent large ref={largeSidebarRef}>
                     <SideBarAvatar large>
                         <SideBarAvatarImg src={preview} large/>
                     </SideBarAvatar>
@@ -392,7 +448,8 @@ function UserSideBar() {
                         <UserGroupContent>
                             {userGroupData.map(item => {
                                 return (
-                                    <Grid container={true} key={item.id} sx={{padding:'10px 0', borderBottom:'1px solid #000'}}>
+                                    <Grid container={true} key={item.id}
+                                          sx={{padding: '10px 0', borderBottom: '1px solid #000'}}>
                                         <Grid item xs={3} sm={6} md={3} lg={3}>
                                             <UserGroupThumbnail src={item.thumbnail}/>
 
@@ -403,7 +460,7 @@ function UserSideBar() {
                                                     <Typography variant={`h6`}>{item.title}</Typography>
                                                 </Grid>
                                                 <Grid item xs={12} sm={12} md={6} lg={6}>
-                                                    <Typography pragraph>{item.lastChatDate}</Typography>
+                                                    <Typography paragraph={true}>{item.lastChatDate}</Typography>
                                                 </Grid>
                                             </Grid>
                                             <Grid container={true} alignItems={`center`} sx={{marginTop: '10px'}}>
@@ -431,8 +488,12 @@ function UserSideBar() {
                     </UsersGroup>
 
 
+                    <LogoutBtn>
+                        Logout
+                    </LogoutBtn>
+
                 </SideBarComponent>
-                <SideBarComponent>
+                <SideBarComponent ref={smallSidebarRef}>
 
                     <SideBarAvatar>
                         <SideBarAvatarImg src={preview}/>
@@ -456,7 +517,7 @@ function UserSideBar() {
                     </MenuItems>
                 </SideBarComponent>
 
-            </Container>
+            </Container>}
         </>
     );
 }

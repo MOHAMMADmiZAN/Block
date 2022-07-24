@@ -80,14 +80,11 @@ function Login() {
     const {browserState, setBrowserState} = useContext(BrowserContextState);
     const [preview, setPreview] = useState('');
 
-
     useEffect(() => {
         if (!browserState.loginData.avatar) {
             setPreview(undefined);
             return
         }
-        console.log(browserState.loginData);
-
         const objectUrl = URL.createObjectURL(browserState.loginData.avatar)
         setPreview(objectUrl)
 
@@ -144,7 +141,7 @@ function Login() {
                         <Grid item={true} lg={6} xl={6} md={6} sm={6}>
                             <FormInputGroup label={`Password`} name={`loginPassword`} type={`password`}
                                             placeholder={`Your Password`} onChange={handleChange}
-                                            value={browserState.loginData.loginPassword}/>
+                                            dvalue={browserState.loginData.loginPassword}/>
                         </Grid>
                     </Grid>
                     <Grid container={true} alignItems={`center`} justifyContent={`center`} spacing={2}>
