@@ -33,6 +33,7 @@ import History from "./History";
 import Shop from "./Shop";
 import Chat from "./Chat";
 import UserSetting from "./UserSetting";
+import Upload from "./UserUpload/Upload";
 
 
 const SideBarComponent = styled.div`
@@ -401,7 +402,7 @@ function UserSideBar() {
                         {menu[1].isActive&&<History />}
                         {menu[2].isActive&&<Shop />}
                         {menu[3].isActive&&<Chat />}
-                        {/*{menu[4].isActive&&<Upload />}*/}
+                        {menu[4].isActive&&<Upload />}
                         {menu[5].isActive&&<UserSetting />}
                     </Container>
 

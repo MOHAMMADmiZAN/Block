@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="283" height="36" viewBox="0 0 283 36">
+  <defs>
+    <filter id="Rectangle_11" x="0" y="0" width="51" height="36" filterUnits="userSpaceOnUse">
+      <feOffset dy="5" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.102"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Progress_Bar" data-name="Progress Bar" transform="translate(15 10)">
+    <path id="Rectangle_11-2" data-name="Rectangle 11" d="M2,0H266a2,2,0,0,1,0,4H2A2,2,0,0,1,2,0Z" transform="translate(0 1)" fill="#363c43"/>
+    <g transform="matrix(1, 0, 0, 1, -15, -10)" filter="url(#Rectangle_11)">
+      <path id="Rectangle_11-3" data-name="Rectangle 11" d="M3,0H18a3,3,0,0,1,0,6H3A3,3,0,0,1,3,0Z" transform="translate(15 10)" fill="#10c516"/>
+    </g>
+  </g>
+</svg>
