@@ -151,7 +151,8 @@ function Header() {
         setBrowserState({
             ...browserState,
             isSideBarOpen: !browserState.isSideBarOpen,
-            isClose: true
+            isClose: true,
+            isPublish: false
         })
     }
 

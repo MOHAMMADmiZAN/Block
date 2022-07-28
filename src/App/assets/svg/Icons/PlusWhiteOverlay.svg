@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+  <g id="ic__" data-name="ic_+" opacity="0.3">
+    <circle id="Oval" cx="19" cy="19" r="19" fill="#fafafb"/>
+    <g id="ic_Plus" transform="translate(11.5 11.5)">
+      <path id="Path" d="M8.333,6.667h5.833a.833.833,0,0,1,0,1.667H8.333v5.833a.833.833,0,0,1-1.667,0V8.333H.833a.833.833,0,1,1,0-1.667H6.667V.833a.833.833,0,1,1,1.667,0Z" fill="#1e75ff"/>
+    </g>
+  </g>
+</svg>

@@ -1,6 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import {useContext} from "react";
 import {BrowserContextState} from "../../../Context/BrowserContext";
+import FrameWindow from '../../../App/assets/svg/Icons/Shape.svg';
+
 
 
 function Frame() {
@@ -18,6 +20,10 @@ function Frame() {
                 <iframe ref={refFrame} src={browserState.currentPage} width="100%" height="100%"
                         id={browserState.demoSiteUniqueId}/>}
 
+            {browserState.isPublish &&
+                <img src={FrameWindow} alt={FrameWindow}/>
+
+            }
 
 
         </>

@@ -21,6 +21,7 @@ const initial = {
     isSignUpSuccess: false,
     loginData: {},
     isSideBarOpen: false,
+    isPublish: false,
 }
 
 function BrowserContext({children}) {
